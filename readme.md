@@ -26,7 +26,7 @@ php artisan vendor:publish --provider="Panigale\GoMyPay\GoMyPayServiceProvider"
 
 ## Basic Usage
 
-It's very simple to use this package:
+### Create payment:
 
 ```
 GoMyPay::payBy($paymentType)
@@ -36,6 +36,51 @@ GoMyPay::payBy($paymentType)
 ```
 
 Then it well return an array include every fields for GoMyPay required. And you need to do is post this fields to GoMyPay. 
+
+
+### Get payment result:
+
+if payment type is entity. it should have options
+
+$paymentType 1: Web-ATM 2: 虛擬帳號繳費 3: 超商條碼代收
+```
+$response = GoMyPay::done($paymentType = null)
+```
+
+GoMyPayTradeId
+```
+$response->serverTradeId
+```
+
+tradeNo 
+
+```
+$response->tradeNo
+```
+
+payAccount
+
+```
+$response->payAccount
+```
+
+amount
+```
+$response->amount
+```
+
+expiredDate
+```
+$response->expiredDate
+```
+
+
+if payment type is Web-ATM, you can get pay date.
+```
+$response->payDate
+```
+
+
 
 ## License
 

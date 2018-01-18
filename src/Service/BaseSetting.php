@@ -46,21 +46,39 @@ class BaseSetting
     protected $phone = null;
 
     /**
+     * your gomypay trade code.
+     *
      * @var
      */
     protected $tradeCode;
 
     /**
+     * your gomypay store code
+     *
      * @var
      */
     protected $storeCode;
 
     /**
+     * return url
+     *
      * @var
      */
     protected $callbackUrl;
 
+    /**
+     * backend notification url
+     *
+     * @var
+     */
     protected $backendUrl;
+
+    /**
+     * which pay
+     *
+     * @var
+     */
+    protected $payBy;
 
     /**
      * load config
@@ -138,12 +156,15 @@ class BaseSetting
      * @param string $name
      * @param $email
      * @param $phone
+     * @return $this
      */
-    public function withUser(string $name, $email, $phone)
+    public function withUser($name, $email, $phone)
     {
         $this->setUserName($name)
-            ->setEmail($email)
-            ->setPhoneNumber($phone);
+             ->setEmail($email)
+             ->setPhoneNumber($phone);
+
+        return $this;
     }
 
     /**
@@ -194,6 +215,19 @@ class BaseSetting
     public function setPhoneNumber($phone)
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * set payment type
+     *
+     * @param $type
+     * @return $this
+     */
+    public function setPayBy($type)
+    {
+        $this->payBy = $type;
 
         return $this;
     }

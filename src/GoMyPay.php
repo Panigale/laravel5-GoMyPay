@@ -18,6 +18,6 @@ class GoMyPay
      */
     public static function payBy($paymentType)
     {
-        return PaymentFactory::create($paymentType);
+        return PaymentFactory::create($paymentType)->setPayBy($paymentType);
     }
 }

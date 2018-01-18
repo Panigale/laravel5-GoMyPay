@@ -22,7 +22,7 @@ interface GoMyPayContract
      *
      * @return mixed
      */
-    public function done();
+    public function done($paymentType = null);
 
     /**
      * get action url.
@@ -47,4 +47,5 @@ interface GoMyPayContract
      * @return mixed
      */
     public function withUser($name ,$email ,$phone);
+
 }
