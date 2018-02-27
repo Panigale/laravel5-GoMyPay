@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Pagnigale\\GoMyPay\\": "src/"
+            "Panigale\\GoMyPay\\": "src/"
         }
     },
     "license": "MIT"
