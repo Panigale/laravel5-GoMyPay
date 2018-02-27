@@ -23,10 +23,12 @@ class WebATM extends GoMyPayable
      */
     public function callback(array $response)
     {
-        //當接收到從金流傳回的交易結束
-        //如果狀態為 1 繳費成功
-        //紀錄付款匯入的帳戶，補充點數
-        //如果狀態為 0 繳費未完成
+        /**
+         * 當接收到從金流傳回的交易結束
+         * 如果狀態為 1 繳費成功
+         * 紀錄付款匯入的帳戶，補充點數
+         * 如果狀態為 0 繳費未完成
+         */
         $serverTradeId = $response['OrderID'];
         $tradeNo = $response['CustomerOrderID'];
         $payAccount = $response['e_payaccount'];

@@ -21,9 +21,7 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
      */
     public function done($paymentType = null)
     {
-        $request = app()->make(Request::class);
-
-        return EntityFactory::create($paymentType)->callback($request->all());
+        return EntityFactory::create($paymentType)->callback(request()->all());
     }
 
     /**

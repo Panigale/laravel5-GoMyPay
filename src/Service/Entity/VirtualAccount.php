@@ -22,9 +22,11 @@ class VirtualAccount extends GoMyPayable
      */
     public function callback(array $response)
     {
-        //當接收到從金流傳回的交易資訊
-        //紀錄交易資訊
-        //產生條碼 view
+        /**
+         * 當接收到從金流傳回的交易資訊
+         * 紀錄交易資訊
+         * 產生條碼 view
+         */
         $serverTradeId = $response['OrderID'];
         $tradeNo = $response['CustomerOrderID'];
         $payAccount = $response['e_payaccount'];

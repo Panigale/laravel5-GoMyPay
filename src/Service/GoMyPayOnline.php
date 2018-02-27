@@ -70,8 +70,7 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
      */
     public function done($paymentType = null)
     {
-        $request = app()->make(Request::class);
-        $response = $request->all();
+        $response = request()->all();
         $status = $response['str_ok'];
         $goMyPayNo = $response['str_no'];
         $amount = (int)$response['e_money'];
