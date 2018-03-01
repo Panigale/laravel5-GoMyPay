@@ -8,8 +8,12 @@
 namespace Panigale\GoMyPay;
 
 
+use Panigale\GoMyPay\Service\ReceivePayment;
+
 class GoMyPay
 {
+    use ReceivePayment;
+
     /**
      * create GoMyPay payment method.
      *
@@ -19,5 +23,10 @@ class GoMyPay
     public static function payBy($paymentType)
     {
         return PaymentFactory::create($paymentType)->setPayBy($paymentType);
+    }
+
+    public function done()
+    {
+        return $this->receive();
     }
 }
