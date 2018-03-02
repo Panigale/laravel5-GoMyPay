@@ -33,6 +33,6 @@ class GoMyPayServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/gomypay.php' => config_path('gomypay.php'),
-        ]);
+        ] ,'config');
     }
 }
