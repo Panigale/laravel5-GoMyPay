@@ -44,7 +44,7 @@ class GoMyPay
             'e_money'       => $amount,
             'e_cardno'      =>  $this->hashCardNo($creditCard->number, $creditCard->expiry, $creditCard->card),
             'str_check'     => $this->getCheckValue($tradeCode ,$no ,$storeCode ,$amount),
-            'e_name'        => $user->name,
+            'e_name'        => $user->name(),
             'e_telm'        => $user->phone,
             'e_email'       => $user->email,
             'e_info'        => config('gomypay.title'),
