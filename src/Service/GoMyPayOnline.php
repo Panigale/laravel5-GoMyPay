@@ -77,8 +77,8 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
         $orderNo = $response['e_orderno'];
         $bankResponse = $response['bstr_msg'];
 
-        return [
-            'status'        => (boolean)$status,
+        return (object)[
+            'result'        => (boolean)$status,
             'serverTradeId' => $goMyPayNo,
             'amount'        => $amount,
             'tradeNo'       => $orderNo,

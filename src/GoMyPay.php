@@ -42,7 +42,7 @@ class GoMyPay
             'e_storename'   => config('app.name'),
             'e_mode'        => 9,
             'e_money'       => $amount,
-            'e_cardno'      =>  $this->hashCardNo($creditCard->number, $creditCard->expiry, $creditCard->card),
+            'e_cardno'      =>  $this->hashCardNo($creditCard->number, $creditCard->expiry, $creditCard->cvv),
             'str_check'     => $this->getCheckValue($tradeCode ,$no ,$storeCode ,$amount),
             'e_name'        => $user->name(),
             'e_telm'        => $user->phone,
