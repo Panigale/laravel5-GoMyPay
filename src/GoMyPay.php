@@ -48,7 +48,8 @@ class GoMyPay
             'e_telm'        => $user->phone,
             'e_email'       => $user->email,
             'e_info'        => config('gomypay.title'),
-            'e_backend_url' => config('gomypay.backendUrl')
+            'e_backend_url' => config('gomypay.backendUrl'),
+            'actionUrl' => 'https://gomypay.asia/Shopping/creditpay.asp'
         ];
     }
 
