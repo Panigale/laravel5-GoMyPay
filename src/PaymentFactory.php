@@ -17,7 +17,7 @@ class PaymentFactory
     {
         if($paymentType === 'creditcard')
             return new GoMyPayOnline();
-        else
-            return new GoMyPayEntity();
+
+        return new GoMyPayEntity();
     }
 }

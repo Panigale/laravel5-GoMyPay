@@ -42,7 +42,8 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
             'BuyerTelm'       => $this->phone,
             'CallBackUrl'     => $this->backendUrl,
             'ReturnUrl'       => $this->callbackUrl,
-            'str_check'       => $this->tradeCode
+            'str_check'       => $this->tradeCode,
+            'actionUrl'       => $this->getActionUrl()
         ];
     }
 
