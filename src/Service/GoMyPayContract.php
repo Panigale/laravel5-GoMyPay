@@ -15,7 +15,7 @@ interface GoMyPayContract
      *
      * @return mixed
      */
-    public function create();
+    public function redirect();
 
     /**
      * get payment result.

@@ -30,7 +30,7 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
      * @return array|mixed
      * @throws Exception
      */
-    public function create()
+    public function redirect()
     {
         return [
             'Customer_no'     => $this->storeCode,
@@ -70,14 +70,14 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
         $tradeType = $this->payBy;
 
         switch ($tradeType) {
-            case 'Web-ATM':
+            case 'Web ATM':
                 return 1;
-            case 'virtual-number':
+            case 'virtual number':
                 return 2;
             case 'barcode':
                 return 3;
             default:
-                throw new Exception('not allow trade type.');
+                throw new Exception('not allow payment type.');
         }
     }
 }

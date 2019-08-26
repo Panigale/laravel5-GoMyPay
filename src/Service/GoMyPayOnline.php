@@ -91,7 +91,7 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
      *
      * @return mixed
      */
-    public function create()
+    public function redirect()
     {
         $fields = [
             'e_orderno'     => $this->paymentNo ?: uniqid(),
