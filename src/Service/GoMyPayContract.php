@@ -48,4 +48,5 @@ interface GoMyPayContract
      */
     public function withUser($name ,$email ,$phone);
 
+    public function successResponse() : string;
 }

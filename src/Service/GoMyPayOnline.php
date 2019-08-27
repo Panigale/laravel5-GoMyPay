@@ -76,7 +76,7 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
         $orderNo = $response['e_orderno'];
         $bankResponse = $response['bstr_msg'];
 
-        return (object)[
+        return [
             'serviceNo' => $goMyPayNo,
             'payAmount' => $amount,
             'payed' => $this->hasPayed(),
@@ -217,5 +217,10 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
         $this->e_mode = 9;
 
         return $this;
+    }
+
+    public function successResponse() : string
+    {
+        return '[SUCCESS]';
     }
 }

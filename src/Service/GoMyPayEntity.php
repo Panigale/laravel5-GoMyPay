@@ -120,4 +120,9 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
                 throw new Exception('not allow payment type.');
         }
     }
+
+    public function successResponse() : string
+    {
+        return 'CONFIRM';
+    }
 }

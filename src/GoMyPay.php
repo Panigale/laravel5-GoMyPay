@@ -9,6 +9,7 @@ namespace Panigale\GoMyPay;
 
 
 use Panigale\GoMyPay\Service\GoMyPayEntity;
+use Panigale\GoMyPay\Service\GoMyPayOnline;
 use Panigale\GoMyPay\Service\ReceivePayment;
 
 class GoMyPay
@@ -33,7 +34,12 @@ class GoMyPay
 
     public function successResponse()
     {
-        return 'CONFIRM';
+        /**
+         * 如果沒有 OrderType 這個參數，代表非信用卡交易
+         */
+        $gomypay = request()->has('OrderType') ? new GoMyPayOnline() : new GoMyPayEntity();
+
+        return $gomypay->successResponse();
     }
 
     /**
@@ -62,7 +68,7 @@ class GoMyPay
                 'e_storename'   => config('app.name'),
                 'e_mode'        => 9,
                 'e_money'       => $amount,
-                'e_cardno'      =>  $this->hashCardNo($creditCard->number, $creditCard->expiry, $creditCard->cvv),
+                'e_cardno'      =>  $this->hashCardNo($creditCard['number'], $creditCard['expiry'], $creditCard['cvv']),
                 'str_check'     => $this->getCheckValue($tradeCode ,$no ,$storeCode ,$amount),
                 'e_name'        => $name,
                 'e_telm'        => $phone,
