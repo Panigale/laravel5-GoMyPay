@@ -71,19 +71,23 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
     public function done($paymentType = null)
     {
         $response = request()->all();
-        $status = $response['str_ok'];
         $goMyPayNo = $response['str_no'];
         $amount = (int)$response['e_money'];
         $orderNo = $response['e_orderno'];
         $bankResponse = $response['bstr_msg'];
 
         return (object)[
-            'result'        => (boolean)$status,
-            'serverTradeId' => $goMyPayNo,
-            'amount'        => $amount,
-            'tradeNo'       => $orderNo,
-            'response'      => $bankResponse
+            'serviceNo' => $goMyPayNo,
+            'payAmount' => $amount,
+            'payed' => $this->hasPayed(),
+            'no'        => $orderNo,
+            'response'  => $bankResponse
         ];
+    }
+
+    protected function payed()
+    {
+        return 'str_ok';
     }
 
     /**
@@ -110,7 +114,7 @@ class GoMyPayOnline extends BaseSetting implements GoMyPayContract
         /**
          * 如果開啟 e_mode，就需要附帶卡號資訊
          */
-        if (!is_null($this->e_mode)) {
+        if (! is_null($this->e_mode)) {
             $fields['e_mode'] = $this->e_mode;
             $fields['e_cardno'] = $this->getHashCardNo();
         }

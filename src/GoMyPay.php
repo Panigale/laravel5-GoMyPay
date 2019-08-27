@@ -31,6 +31,11 @@ class GoMyPay
         return $this->receive();
     }
 
+    public function successResponse()
+    {
+        return 'CONFIRM';
+    }
+
     /**
      * @param $user
      * @param $amount
@@ -70,6 +75,7 @@ class GoMyPay
         $entityPayment = new GoMyPayEntity();
 
         return $entityPayment->withPaymentNo($no)
+                            ->withAmount($amount)
                             ->setPayBy($paymentMethod)
                             ->withUser($name ,$user->email ,$user->phone)
                             ->redirect();

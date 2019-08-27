@@ -15,6 +15,7 @@ use Sportlottery\Repositories\PaymentFlowRepository;
 
 class VirtualAccount extends GoMyPayable
 {
+
     /**
      * 傳送交易資訊到 GoMyPay 後，會附帶交易資訊回到 callback url 的處理方法
      *
@@ -33,6 +34,7 @@ class VirtualAccount extends GoMyPayable
 
         //格式 Y-m
         $limitDate = $response['LimitDate'];
+
 
         return [
             'expiredDate'    => $limitDate,

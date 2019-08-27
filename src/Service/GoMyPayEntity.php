@@ -15,14 +15,48 @@ use Panigale\GoMyPay\Service\Entity\EntityFactory;
 class GoMyPayEntity extends BaseSetting implements GoMyPayContract
 {
     /**
+     * GoMyPayOnline constructor.
+     */
+    public function __construct()
+    {
+        $this->init();
+    }
+
+    /**
+     * init
+     */
+    private function init()
+    {
+        $this->loadConfig();
+    }
+
+    /**
      * @param null $paymentType
      * @return array|mixed
      * @throws Exception
      */
     public function done($paymentType = null)
     {
-        return EntityFactory::create($paymentType)->callback(request()->all());
+        $request = request();
+
+        return [
+            'paymentType' => $request->OrderType,
+            'serviceNo'   => $request->OrderID,
+            'no'          => $request->CustomerOrderID,
+            'payAccount'  => $request->PayAccount,
+            'payed'      => $this->hasPayed(),
+            'payAmount'   => $request->PayAmount,
+            'payDate'     => $request->PayDate
+        ];
+//        return EntityFactory::create($paymentType)->callback(request()->all());
     }
+
+    protected function payed()
+    {
+        return 'Status';
+    }
+
+
 
     /**
      * create trade fields
@@ -32,7 +66,7 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
      */
     public function redirect()
     {
-        return [
+        $attributes = [
             'Customer_no'     => $this->storeCode,
             'CustomerOrderID' => $this->paymentNo,
             'OrderType'       => $this->getPaymentType(),
@@ -41,10 +75,16 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
             'BuyerEmail'      => $this->email,
             'BuyerTelm'       => $this->phone,
             'CallBackUrl'     => $this->backendUrl,
-            'ReturnUrl'       => $this->callbackUrl,
             'str_check'       => $this->tradeCode,
             'actionUrl'       => $this->getActionUrl()
         ];
+
+        if ($this->payBy === 'Web ATM')
+            $attributes = array_merge($attributes, [
+                'ReturnUrl' => $this->callbackUrl,
+            ]);
+
+        return $attributes;
     }
 
     /**
@@ -72,7 +112,7 @@ class GoMyPayEntity extends BaseSetting implements GoMyPayContract
         switch ($tradeType) {
             case 'Web ATM':
                 return 1;
-            case 'virtual number':
+            case 'virtual account':
                 return 2;
             case 'barcode':
                 return 3;

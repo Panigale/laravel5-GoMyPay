@@ -23,4 +23,8 @@ return [
 
     // payment title.
     'title' => env('GOMYPAY_TITILE'),
+
+    'user' => [
+        'name' => 'name'
+    ]
 ];

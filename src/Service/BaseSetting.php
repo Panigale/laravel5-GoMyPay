@@ -231,4 +231,11 @@ class BaseSetting
 
         return $this;
     }
+
+    public function hasPayed()
+    {
+        $attribute = $this->payed();
+
+        return request()->$attribute === 1;
+    }
 }
