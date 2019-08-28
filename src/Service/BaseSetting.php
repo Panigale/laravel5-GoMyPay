@@ -236,6 +236,6 @@ class BaseSetting
     {
         $attribute = $this->payed();
 
-        return request()->$attribute === 1;
+        return request()->$attribute == 1;
     }
 }
