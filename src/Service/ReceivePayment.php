@@ -8,6 +8,8 @@
 namespace Panigale\GoMyPay\Service;
 
 
+use Panigale\GoMyPay\Factories\GoMyPayFactory;
+
 trait ReceivePayment
 {
     protected function receive()
@@ -20,5 +22,13 @@ trait ReceivePayment
         $gomypay = is_null($orderType) ? new GoMyPayOnline() : new GoMyPayEntity();
 
         return $gomypay->done($orderType);
+    }
+
+    protected function receiveV2()
+    {
+        $paymentType = request()->Send_Type;
+        $handler = GoMyPayFactory::makeHandlerByType($paymentType);
+        
+        return $handler->done();
     }
 }

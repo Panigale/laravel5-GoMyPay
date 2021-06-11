@@ -8,8 +8,12 @@
 namespace Panigale\GoMyPay\Service;
 
 
+use Panigale\GoMyPay\Service\Traits\GoMyPayConfig;
+
 class BaseSetting
 {
+    use GoMyPayConfig;
+
     /**
      * trade amount.
      *
@@ -45,33 +49,6 @@ class BaseSetting
      */
     protected $phone = null;
 
-    /**
-     * your gomypay trade code.
-     *
-     * @var
-     */
-    protected $tradeCode;
-
-    /**
-     * your gomypay store code
-     *
-     * @var
-     */
-    protected $storeCode;
-
-    /**
-     * return url
-     *
-     * @var
-     */
-    protected $callbackUrl;
-
-    /**
-     * backend notification url
-     *
-     * @var
-     */
-    protected $backendUrl;
 
     /**
      * which pay
@@ -80,16 +57,7 @@ class BaseSetting
      */
     protected $payBy;
 
-    /**
-     * load config
-     */
-    protected function loadConfig()
-    {
-        $this->storeCode = config('gomypay.storeCode') ?: env('GOMYPAY_STORECODE');
-        $this->tradeCode = config('gomypay.tradeCode') ?: env('GOMYPAY_TRADECODE');
-        $this->callbackUrl = config('gomypay.callbackUrl') ?: env('GOMYPAY_CALLBACK');
-        $this->backendUrl = config('gomypay.backendUrl') ?: env('GOMYPAY_BACKEND');
-    }
+
 
     /**
      * set trade code.

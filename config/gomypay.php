@@ -5,6 +5,7 @@
  * Time: 下午2:06
  */
 return [
+    'version' => env('GOMYPAY_VERSION'),
 
     // your store name.
     'storeName' => env('GOMYPAY_STORE_NAME'),
@@ -26,5 +27,7 @@ return [
 
     'user' => [
         'name' => 'name'
-    ]
+    ],
+
+    'developerMode' => true
 ];

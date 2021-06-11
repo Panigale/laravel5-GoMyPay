@@ -8,6 +8,7 @@
 namespace Panigale\GoMyPay;
 
 
+use Panigale\GoMyPay\Factories\GoMyPayFactory;
 use Panigale\GoMyPay\Service\GoMyPayEntity;
 use Panigale\GoMyPay\Service\GoMyPayOnline;
 use Panigale\GoMyPay\Service\ReceivePayment;
@@ -15,6 +16,11 @@ use Panigale\GoMyPay\Service\ReceivePayment;
 class GoMyPay
 {
     use ReceivePayment;
+
+    public function __construct()
+    {
+        $version = config('gomypay.version');
+    }
 
     /**
      * create GoMyPay payment method.
@@ -29,6 +35,9 @@ class GoMyPay
 
     public function done()
     {
+        if(config('gomypay.version') === 'v2')
+            return $this->receiveV2();
+
         return $this->receive();
     }
 
@@ -59,6 +68,9 @@ class GoMyPay
         $email = $user->email;
         $phone = $user->phone;
         $name = $user->$userNameAttribute;
+
+        if(config('gomypay.version') === 'v2')
+            return $this->redirectV2($user ,$amount ,$no ,$paymentMethod ,$creditCard);
 
         if($paymentMethod === 'credit card')
             return [
@@ -112,5 +124,18 @@ class GoMyPay
     private function hashCardNo($number ,$expiry ,$cvv)
     {
         return base64_encode($cvv . $expiry . $number);
+    }
+
+    private function redirectV2($user, $amount, $no, $paymentMethod, $creditCard)
+    {
+        $handler = GoMyPayFactory::handler($paymentMethod);
+
+        $handler->setCustomer($user);
+        
+        if($creditCard){
+            $handler->payByCreditCard($creditCard);
+        }
+
+        return $handler->pay($amount ,$no);
     }
 }
